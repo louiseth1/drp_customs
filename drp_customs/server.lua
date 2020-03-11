@@ -1,4 +1,4 @@
-RegisterServerEvent("customs:check")
+RegisterServerEvent("customs:check") -- these are new commands (may not work) -- (haven't tested)
 AddEventHandler("customs:check",function(title, data, cost, value)
     local source = tonumber(source)
     local dataUser = exports["drp_id"]:GetCharacterData(source)
