@@ -4,9 +4,11 @@ AddEventHandler("customs:check",function(title, data, cost, value)
     local dataUser = exports["drp_id"]:GetCharacterData(source)
     TriggerEvent("DRP_Bank:GetCharacterMoney", dataUser.charid, function(characterMoney)
         local userMoney = characterMoney.data[1].bank
-        local newBankBalance =  userMoney - cost
+    local newBankBalance =  userMoney - cost
         if userMoney >= cost then
             print(newBankBalance)
+            TriggerEvent("DRP_Bank:RemoveBankMoney", source, newBankBalance)
+            Wait(100)
             TriggerClientEvent("customs:receive", source, title, data, value, back)
             exports["externalsql"]:DBAsyncQuery({
                 string = "UPDATE `characters` SET `bank` = :bank WHERE `id` = :charid",
@@ -20,21 +22,12 @@ AddEventHandler("customs:check",function(title, data, cost, value)
             else
                 if userMoney <= cost then
             TriggerClientEvent("DRP_Core:Error", source, "Purchase", tostring("You succesfuly teleported to waypoint"), 2500, false, "leftCenter")
-                end
-            end
-    end)
-end)
- 
- 
-RegisterServerEvent("customs:check2")
-AddEventHandler("customs:check2",function(title, data, cost, value, back)
-    local source = tonumber(source)
-    local dataUser = exports["drp_id"]:GetCharacterData(source)
-    TriggerEvent("DRP_Bank:GetCharacterMoney", dataUser.charid, function(characterMoney)
-        local userMoney = characterMoney.data[1].bank
+@@ -35,16 +29,10 @@ AddEventHandler("customs:check2",function(title, data, cost, value, back)
         local newBankBalance =  userMoney - cost
         if userMoney >= cost then
             print(newBankBalance)
+            TriggerEvent("DRP_Bank:RemoveBankMoney", source, newBankBalance)
+            Wait(100)
             TriggerClientEvent("customs:receive2", source, title, data, value, back)
             exports["externalsql"]:DBAsyncQuery({
                 string = "UPDATE `characters` SET `bank` = :bank WHERE `id` = :charid",
@@ -48,21 +41,12 @@ AddEventHandler("customs:check2",function(title, data, cost, value, back)
             else
                 if userMoney <= cost then
             TriggerClientEvent("DRP_Core:Error", source, "Purchase", tostring("You succesfuly teleported to waypoint"), 2500, false, "leftCenter")
-                end
-            end
-    end)
-end)
- 
- 
-RegisterServerEvent("customs:check3")
-AddEventHandler("customs:check3",function(title, data, cost, mod, back, name, wtype)
-    local source = tonumber(source)
-    local dataUser = exports["drp_id"]:GetCharacterData(source)
-    TriggerEvent("DRP_Bank:GetCharacterMoney", dataUser.charid, function(characterMoney)
-        local userMoney = characterMoney.data[1].bank
+@@ -63,16 +51,10 @@ AddEventHandler("customs:check3",function(title, data, cost, mod, back, name, wt
         local newBankBalance =  userMoney - cost
         if userMoney >= cost then
             print(newBankBalance)
+            TriggerEvent("DRP_Bank:RemoveBankMoney", source, newBankBalance)
+            Wait(100)
             TriggerClientEvent("customs:receive3", source, title, data, mod, back, name, wtype)
             exports["externalsql"]:DBAsyncQuery({
                 string = "UPDATE `characters` SET `bank` = :bank WHERE `id` = :charid",
@@ -76,9 +60,11 @@ AddEventHandler("customs:check3",function(title, data, cost, mod, back, name, wt
             else
                 if userMoney <= cost then
             TriggerClientEvent("DRP_Core:Error", source, "Purchase", tostring("You succesfuly teleported to waypoint"), 2500, false, "leftCenter")
-                end
-            end
-    end)
+@@ -114,4 +96,4 @@ AddEventHandler('playerDropped', function()
+        TriggerClientEvent('customs:lock',-1,tbl)
+        print("LS Customs status: "..json.encode(tbl))
+    end
+end) 
 end)
    
  
