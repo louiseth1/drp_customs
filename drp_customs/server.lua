@@ -10,15 +10,7 @@ AddEventHandler("customs:check",function(title, data, cost, value)
             TriggerEvent("DRP_Bank:RemoveBankMoney", source, newBankBalance)
             Wait(100)
             TriggerClientEvent("customs:receive", source, title, data, value, back)
-            exports["externalsql"]:DBAsyncQuery({
-                string = "UPDATE `characters` SET `bank` = :bank WHERE `id` = :charid",
-                data = {
-                    bank = newBankBalance,
-                    charid = dataUser.charid
-                }
-            }, function(results)
             TriggerClientEvent("DRP_Core:Success", source, "Purchase", tostring("An amount of $"..cost.." has been removed to your Bank Account"), 2500, false, "leftCenter")
-            end)
             else
                 if userMoney <= cost then
             TriggerClientEvent("DRP_Core:Error", source, "Purchase", tostring("You succesfuly teleported to waypoint"), 2500, false, "leftCenter")
@@ -29,15 +21,7 @@ AddEventHandler("customs:check",function(title, data, cost, value)
             TriggerEvent("DRP_Bank:RemoveBankMoney", source, newBankBalance)
             Wait(100)
             TriggerClientEvent("customs:receive2", source, title, data, value, back)
-            exports["externalsql"]:DBAsyncQuery({
-                string = "UPDATE `characters` SET `bank` = :bank WHERE `id` = :charid",
-                data = {
-                    bank = newBankBalance,
-                    charid = dataUser.charid
-                }
-            }, function(results)
             TriggerClientEvent("DRP_Core:Success", source, "Purchase", tostring("An amount of $"..cost.." has been removed to your Bank Account"), 2500, false, "leftCenter")
-            end)
             else
                 if userMoney <= cost then
             TriggerClientEvent("DRP_Core:Error", source, "Purchase", tostring("You succesfuly teleported to waypoint"), 2500, false, "leftCenter")
@@ -48,15 +32,7 @@ AddEventHandler("customs:check",function(title, data, cost, value)
             TriggerEvent("DRP_Bank:RemoveBankMoney", source, newBankBalance)
             Wait(100)
             TriggerClientEvent("customs:receive3", source, title, data, mod, back, name, wtype)
-            exports["externalsql"]:DBAsyncQuery({
-                string = "UPDATE `characters` SET `bank` = :bank WHERE `id` = :charid",
-                data = {
-                    bank = newBankBalance,
-                    charid = dataUser.charid
-                }
-            }, function(results)
             TriggerClientEvent("DRP_Core:Success", source, "Purchase", tostring("An amount of $"..cost.." has been removed to your Bank Account"), 2500, false, "leftCenter")
-            end)
             else
                 if userMoney <= cost then
             TriggerClientEvent("DRP_Core:Error", source, "Purchase", tostring("You succesfuly teleported to waypoint"), 2500, false, "leftCenter")
