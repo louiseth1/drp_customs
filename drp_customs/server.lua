@@ -1,46 +1,57 @@
-RegisterServerEvent("customs:check") -- these are new commands (may not work) -- (haven't tested)
+RegisterServerEvent("customs:check")
 AddEventHandler("customs:check",function(title, data, cost, value)
-    local source = tonumber(source)
-    local dataUser = exports["drp_id"]:GetCharacterData(source)
+	local src = tonumber(source)
+    local dataUser = exports["drp_id"]:GetCharacterData(src)
     TriggerEvent("DRP_Bank:GetCharacterMoney", dataUser.charid, function(characterMoney)
         local userMoney = characterMoney.data[1].bank
-    local newBankBalance =  userMoney - cost
+    	local newBankBalance =  userMoney - cost
         if userMoney >= cost then
-            print(newBankBalance)
-            TriggerEvent("DRP_Bank:RemoveBankMoney", source, newBankBalance)
-            Wait(100)
-            TriggerClientEvent("customs:receive", source, title, data, value, back)
-            TriggerClientEvent("DRP_Core:Success", source, "Purchase", tostring("An amount of $"..cost.." has been removed to your Bank Account"), 2500, false, "leftCenter")
-            else
-                if userMoney <= cost then
-            TriggerClientEvent("DRP_Core:Error", source, "Purchase", tostring("You succesfuly teleported to waypoint"), 2500, false, "leftCenter")
-@@ -35,16 +29,10 @@ AddEventHandler("customs:check2",function(title, data, cost, value, back)
-        local newBankBalance =  userMoney - cost
+	TriggerEvent("DRP_Bank:RemoveBankMoney", src, cost)
+	Wait(100)
+	TriggerClientEvent("customs:receive", src, title, data, value, back)
+	
+		else
+			TriggerClientEvent("DRP_Core:Error", src, "Purchase", tostring("You dont have enough to make the purchase"), 2500, false, "leftCenter")	
+		end
+	end)
+end)
+
+
+RegisterServerEvent("customs:check2")
+AddEventHandler("customs:check2",function(title, data, cost, value, back)
+	local src = tonumber(source)
+    local dataUser = exports["drp_id"]:GetCharacterData(src)
+    TriggerEvent("DRP_Bank:GetCharacterMoney", dataUser.charid, function(characterMoney)
+        local userMoney = characterMoney.data[1].bank
+    	local newBankBalance =  userMoney - cost
         if userMoney >= cost then
-            print(newBankBalance)
-            TriggerEvent("DRP_Bank:RemoveBankMoney", source, newBankBalance)
-            Wait(100)
+		TriggerEvent("DRP_Bank:RemoveBankMoney", src, cost)
+		Wait(100)
             TriggerClientEvent("customs:receive2", source, title, data, value, back)
-            TriggerClientEvent("DRP_Core:Success", source, "Purchase", tostring("An amount of $"..cost.." has been removed to your Bank Account"), 2500, false, "leftCenter")
-            else
-                if userMoney <= cost then
-            TriggerClientEvent("DRP_Core:Error", source, "Purchase", tostring("You succesfuly teleported to waypoint"), 2500, false, "leftCenter")
-@@ -63,16 +51,10 @@ AddEventHandler("customs:check3",function(title, data, cost, mod, back, name, wt
-        local newBankBalance =  userMoney - cost
+			
+		else
+			TriggerClientEvent("DRP_Core:Error", src, "Purchase", tostring("You dont have enough to make the purchase"), 2500, false, "leftCenter")
+		end
+	end)
+end)
+
+
+RegisterServerEvent("customs:check3")
+AddEventHandler("customs:check3",function(title, data, cost, mod, back, name, wtype)
+	local src = tonumber(source)
+    local dataUser = exports["drp_id"]:GetCharacterData(src)
+    TriggerEvent("DRP_Bank:GetCharacterMoney", dataUser.charid, function(characterMoney)
+        local userMoney = characterMoney.data[1].bank
+    	local newBankBalance =  userMoney - cost
         if userMoney >= cost then
-            print(newBankBalance)
-            TriggerEvent("DRP_Bank:RemoveBankMoney", source, newBankBalance)
-            Wait(100)
+	TriggerEvent("DRP_Bank:RemoveBankMoney", src, cost)
+	Wait(100)
             TriggerClientEvent("customs:receive3", source, title, data, mod, back, name, wtype)
-            TriggerClientEvent("DRP_Core:Success", source, "Purchase", tostring("An amount of $"..cost.." has been removed to your Bank Account"), 2500, false, "leftCenter")
-            else
-                if userMoney <= cost then
-            TriggerClientEvent("DRP_Core:Error", source, "Purchase", tostring("You succesfuly teleported to waypoint"), 2500, false, "leftCenter")
-@@ -114,4 +96,4 @@ AddEventHandler('playerDropped', function()
-        TriggerClientEvent('customs:lock',-1,tbl)
-        print("LS Customs status: "..json.encode(tbl))
-    end
-end) 
+			
+		else
+			TriggerClientEvent("DRP_Core:Error", src, "Purchase", tostring("You dont have enough to make the purchase"), 2500, false, "leftCenter")
+		end
+	end)
 end)
    
  
